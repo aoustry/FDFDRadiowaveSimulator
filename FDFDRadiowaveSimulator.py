@@ -290,7 +290,7 @@ class FDFDRadiowaveSimulator():
         Psi3b = (1/Psi3[source_point])*Psi3
         Psi=Psi3b.reshape((self.Ny,self.Nx))
         if generate_bitmap:
-            plt.imshow(np.power(Psi, 0.15), cmap="seismic", origin="upper")
+            plt.imshow(np.power(Psi, 0.05), cmap="winter", origin="upper")
             plt.savefig("output/"+self.name+str(x)+"_"+str(y)+".png")
             plt.show()
         return Psi

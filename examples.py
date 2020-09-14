@@ -24,7 +24,7 @@ def FirstExample():
     sim.set_parameters(float(param["dx"]),0.5*float(param["lambda"]),float(param["opt_ind_walls"]),float(param["alpha_walls"]))
     #Generates a bitmap in the output folder describing the field
     Psi = sim.solve(350,125,True)
-    print(Psi.max())
+    
 
 
 def Generate_Gain_Matrix(mapname,nodes_index):
@@ -74,9 +74,9 @@ def Generate_Gain_Matrix(mapname,nodes_index):
 if __name__ == "__main__":
    
     FirstExample()
-    MAPLIST = ["MAP1","MAP2","MAP3","MAP4","MAP5","MAP6"]
-    for mapname in MAPLIST:
-         for i in range(3):
-             print(mapname,i)
-             Generate_Gain_Matrix(mapname,i)
+    # MAPLIST = ["MAP1","MAP2","MAP3","MAP4","MAP5","MAP6"]
+    # for mapname in MAPLIST:
+    #      for i in range(3):
+    #          print(mapname,i)
+    #          Generate_Gain_Matrix(mapname,i)
         
