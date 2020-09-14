@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Nov 24 17:17:47 2018
-
 @author: oustry
 """
 
