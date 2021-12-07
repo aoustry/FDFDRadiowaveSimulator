@@ -25,7 +25,7 @@ def FirstExample():
     
 
 
-def Generate_Gain_Matrix(mapname,nodes_index):
+def Generate_Gain_Matrix(mapname,nodes_index,wavelength,wlindex):
     """
     Generates the gain matrix associated to a map and a set of sources
 
@@ -33,8 +33,9 @@ def Generate_Gain_Matrix(mapname,nodes_index):
     ----------
     mapname : string
         The map name.
-    nodes_index : TYPE
-        DESCRIPTION.
+    nodes_index : int
+        File index of the nodes positions.
+    wavelength: float, in meters
 
     Returns
     -------
@@ -45,9 +46,9 @@ def Generate_Gain_Matrix(mapname,nodes_index):
     sim = FDFDRadiowaveSimulator(mapname)
     
     #Reading map parameters in the corresponding files (in the "sources" folder)
+        
     param = read_csv("sources/"+mapname+".csv")
-    sim.set_parameters(float(param["dx"]),float(param["lambda"]),float(param["opt_ind_walls"]),float(param["alpha_walls"]))
-    
+    sim.set_parameters(float(param["dx"]),wavelength,float(param["opt_ind_walls"]),float(param["alpha_walls"]))
     #Reading clients and candidates positions in the corresponding files (in the "sources" folder)
     dataframe_candidates,dataframe_clients = read_csv("sources/"+mapname+"_CA_"+str(nodes_index)+".csv"),read_csv("sources/"+mapname+"_CL_"+str(nodes_index)+".csv")
     list_candidates = [(dataframe_candidates['X'][i],dataframe_candidates['Y'][i]) for i in range(len(dataframe_candidates))]
@@ -66,15 +67,18 @@ def Generate_Gain_Matrix(mapname,nodes_index):
             
     #Storing the gain matrix
     G = DataFrame(gain)
-    G.to_csv("output/"+mapname+"_GainMatrix_"+str(nodes_index)+".csv")
+    G.to_csv("output/"+mapname+"_GainMatrix"+wlindex+"_"+str(nodes_index)+".csv")
 
 
 if __name__ == "__main__":
    
-    FirstExample()
-    # MAPLIST = ["MAP1","MAP2","MAP3","MAP4","MAP5","MAP6"]
-    # for mapname in MAPLIST:
-    #      for i in range(3):
-    #          print(mapname,i)
-    #          Generate_Gain_Matrix(mapname,i)
+    #FirstExample()
+    MAPLIST = ["MAP1","MAP2","MAP3","MAP4","MAP5","MAP6"]
+    for mapname in MAPLIST:
+          for i in range(3):
+              print(mapname,i)
+              #2.4GHz simulation
+              Generate_Gain_Matrix(mapname,i,0.125,'A')
+              #5GHz simulation
+              Generate_Gain_Matrix(mapname,i,0.06,'B')
         
