@@ -1,0 +1,2 @@
+LU TIME : 63.10560750961304
+Gain matrix, Average SolveTime : 0.6613811442145595,  Standard deviation SolveTime:0.03384472013828096
