@@ -53,6 +53,7 @@ class FDFDRadiowaveSimulator():
         
         #Variables to store stats
         self.sum =0
+        self.solve_times = []
         self.solve_counter = 0
         self.stats = ""
         
@@ -279,6 +280,7 @@ class FDFDRadiowaveSimulator():
         t=time.time()
         self.E = self.LU_decomposition.solve(S) 
         duree = time.time()-t
+        self.solve_times.append(duree)
         self.sum += duree
         self.solve_counter+= 1
         if self.verbose:
@@ -333,7 +335,8 @@ class FDFDRadiowaveSimulator():
         None.
 
         """
-        self.stats = self.stats+ "Gain matrix, Average SolveTime : "+str((self.sum/self.solve_counter))+"\n"
+        std = np.std(np.array(self.solve_times))
+        self.stats = self.stats+ "Gain matrix, Average SolveTime : "+str((self.sum/self.solve_counter))+",  Standard deviation SolveTime:"+str(std)+"\n"
         f = open("output/"+self.name+"_statistics.txt","w") 
         f.write(self.stats)
         f.close()

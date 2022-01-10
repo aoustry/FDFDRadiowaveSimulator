@@ -57,7 +57,7 @@ def Generate_Gain_Matrix(mapname,nodes_index,wavelength,wlindex):
     
     #Computing 2D gain matrix
     gain = sim.gain_matrix(list_clients + list_candidates)
-    
+    sim.export_stats()
     #Applying floor attenuation factor (2.5D method)
     rho = float(param["rho"])
     for i in range(len(gain)):
