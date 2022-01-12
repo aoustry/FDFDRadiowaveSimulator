@@ -64,11 +64,11 @@ def Generate_Gain_Matrix(mapname,nodes_index,wavelength,wlindex):
     sim.export_stats()
     #Applying floor attenuation factor (2.5D method)
     t0 = time.time()
-    rho = float(param["rho"])
+    att_gain = float(param["g"])
     for i in range(len(gain)):
      	for j in range(len(gain)):
               d=abs(floor[i]-floor[j])
-              gain[i,j] = gain[i,j]*(rho**d)
+              gain[i,j] = gain[i,j]*(att_gain**d)
     total_proj_time = time.time()-t0 
     print("\n Total projection time = {0}s".format(total_proj_time))    
     #Storing the gain matrix
