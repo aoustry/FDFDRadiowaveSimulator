@@ -5,6 +5,7 @@
 
 from FDFDRadiowaveSimulator import FDFDRadiowaveSimulator
 from pandas import DataFrame,read_csv
+import time
 
 def FirstExample():
     """
@@ -56,19 +57,24 @@ def Generate_Gain_Matrix(mapname,nodes_index,wavelength,wlindex):
     floor = [dataframe_clients['Floor'][i] for i in range(len(dataframe_clients))] + [dataframe_candidates['Floor'][i] for i in range(len(dataframe_candidates))]
     
     #Computing 2D gain matrix
+    t0 = time.time()
     gain = sim.gain_matrix(list_clients + list_candidates)
+    total_sim_time = time.time()-t0 
+    print("\n Total simulation time = {0}s".format(total_sim_time)) 
     sim.export_stats()
     #Applying floor attenuation factor (2.5D method)
+    t0 = time.time()
     rho = float(param["rho"])
     for i in range(len(gain)):
      	for j in range(len(gain)):
               d=abs(floor[i]-floor[j])
               gain[i,j] = gain[i,j]*(rho**d)
-            
+    total_proj_time = time.time()-t0 
+    print("\n Total projection time = {0}s".format(total_proj_time))    
     #Storing the gain matrix
     G = DataFrame(gain)
     G.to_csv("output/"+mapname+"_GainMatrix"+wlindex+"_"+str(nodes_index)+".csv")
-
+    
 
 if __name__ == "__main__":
    
