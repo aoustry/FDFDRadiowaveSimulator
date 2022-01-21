@@ -6,15 +6,15 @@ GitHub repository accompanying the paper A. Oustry, M. Le Tilly, T. Clausen, C. 
 
 
 ## Dependencies
-The simulator requires Python3, with standard modules (numpy, scipy, PIL, pandas, matplotlib)
+The simulator requires Python3, with standard modules (numpy, scipy, PIL, pandas, matplotlib).
 
 ## Data and numerical experiments
 
-The make-believe building map used in the aforementioned article are .png located in the folder ''sources''. To run the simulation on these instances, execute the command
+The make-believe building maps used in the aforementioned article are .png located in the folder ''sources''. To run the simulations on these instances, execute the command
 ```
 python3 examples.py
 ```
-
+The simulation outputs are cloned in the folder github.com/aoustry/Odewine/MAPLib, where they are used for WLAN deployment optimization.
 
 ------------------------------------------------------------------------------------------
 
